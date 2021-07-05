@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class BaseBallNumber {
     private List<Ball> balls;
@@ -30,6 +31,14 @@ public class BaseBallNumber {
 
     private int checkSize(List<Integer> balls){
         return new HashSet<>(balls).size();
+    }
+
+    public BallStatus judge(Ball ball){
+        return balls.stream()
+                .map(ball::compare)
+                .filter(x-> x != BallStatus.NOTHING)
+                .findFirst()
+                .orElse(BallStatus.NOTHING);
     }
 
 
